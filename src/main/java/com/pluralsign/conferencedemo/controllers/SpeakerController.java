@@ -39,7 +39,7 @@ public class SpeakerController {
 
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable Long id) {
-        speakerRepository.deleteById(id);
+        speakerRepository.deleteById(id);  
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.PUT)

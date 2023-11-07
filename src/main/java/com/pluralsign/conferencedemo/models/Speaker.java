@@ -2,6 +2,9 @@ package com.pluralsign.conferencedemo.models;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,6 +14,7 @@ import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
 
 @Entity(name = "speakers")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Speaker {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,10 +27,11 @@ public class Speaker {
     private String speaker_bio;
 
     @Lob
-    @Column(name = "speaker_photo", columnDefinition = "BLOB")
+    @Column(name = "speaker_photo", columnDefinition = "bytea")
     private byte[] speaker_photo;
 
     @ManyToMany(mappedBy = "speakers")
+    @JsonIgnore
     private List<Session> sessions;
 
     public List<Session> getSessions() {
